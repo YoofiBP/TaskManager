@@ -9,7 +9,7 @@ mongoose.connect(CONNECTION_URI, {
   useNewUrlParser: true,
   useCreateIndex: true,
   useFindAndModify: false,
-  dbName: "TestDB",
+  dbName: process.env.MONGO_DBNAME,
 });
 
 const db = mongoose.connection;

@@ -46,7 +46,7 @@ userRouter.post("/users/login", async (req, res) => {
     res.send({ user, token });
   } catch (error) {
     res.status(400).send({ error: error.message });
-    console.log(error);
+    //console.log(error);
   }
 });
 
@@ -89,7 +89,7 @@ userRouter.patch("/users/me", auth, async (req, res) => {
   );
 
   if (!isValidOperation) {
-    res.status(400).send({ error: "ßInvalid updates!" });
+    return res.status(400).send({ error: "Invalid updates!" });
   }
 
   try {
@@ -106,7 +106,7 @@ userRouter.delete("/users/me", auth, async (req, res) => {
   try {
     await req.user.remove();
     sendCancellationEmail(req.user.email);
-    res.send(req.user);
+    res.status(200).send(req.user);
   } catch (error) {
     res.status(505).send(error);
   }

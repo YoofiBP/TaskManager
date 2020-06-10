@@ -11,7 +11,6 @@ const sendWelcomeEmail = (recipient) => {
   };
 
   sengGridMail.send(message);
-  console.log(`Message sent to ${recipient}`);
 };
 
 const sendCancellationEmail = (recipient) => {
@@ -24,7 +23,6 @@ const sendCancellationEmail = (recipient) => {
   };
 
   sengGridMail.send(message);
-  console.log(`Cancellation Message sent to ${recipient}`);
 };
 
 module.exports = {
