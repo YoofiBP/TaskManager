@@ -93,7 +93,7 @@ taskRouter.delete("/tasks/:id", auth, async (req, res) => {
     if (!deletedTask) {
       return res.status(401).send();
     }
-    res.send(deletedTask);
+    res.status(204).send(deletedTask);
   } catch (error) {
     res.status(500).send(error);
   }

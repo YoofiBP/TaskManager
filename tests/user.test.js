@@ -141,7 +141,7 @@ test("Should delete user profile", async () => {
     .delete("/users/me")
     .set("Authorization", `Bearer ${userOne.tokens[0].token}`)
     .send()
-    .expect(200);
+    .expect(204);
 
   const user = await User.findById(userOne._id);
   expect(user).toBeNull();
@@ -168,7 +168,7 @@ test("Should delete uploaded picture", async () => {
   await request(app)
     .delete("/users/me/avatar")
     .set("Authorization", `Bearer ${userOne.tokens[0].token}`)
-    .expect(200);
+    .expect(204);
 
   const user = await User.findById(userOne._id);
   expect(user.avatar).toBeFalsy();

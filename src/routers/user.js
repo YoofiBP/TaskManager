@@ -106,7 +106,7 @@ userRouter.delete("/users/me", auth, async (req, res) => {
   try {
     await req.user.remove();
     sendCancellationEmail(req.user.email);
-    res.status(200).send(req.user);
+    res.status(204).send(req.user);
   } catch (error) {
     res.status(505).send(error);
   }
@@ -145,7 +145,7 @@ userRouter
     req.user.avatar = undefined;
     try {
       await req.user.save();
-      res.send(req.user);
+      res.status(204).send(req.user);
     } catch (error) {
       console.log(error);
     }
