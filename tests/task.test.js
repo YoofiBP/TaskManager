@@ -107,6 +107,22 @@ test("Should fetch only completed tasks", async () => {
   );
 });
 
+test("Should fetch only incomplete tasks", async () => {
+  const response = await request(app)
+    .get(`/tasks?completed=false`)
+    .set("Authorization", `Bearer ${userOne.tokens[0].token}`)
+    .send()
+    .expect(200);
+
+  expect(response.body).toEqual(
+    expect.not.arrayContaining([
+      expect.objectContaining({
+        completed: true,
+      }),
+    ])
+  );
+});
+
 test("Should not get tasks if not authenticated", async () => {
   await request(app).get("/tasks").send().expect(401);
 });
