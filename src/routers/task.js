@@ -26,11 +26,8 @@ taskRouter.get("/tasks", auth, async (req, res) => {
     const limit = req.query.limit ? { limit: parseInt(req.query.limit) } : {};
     const skip = req.query.skip ? { skip: parseInt(req.query.skip) } : {};
     const options = Object.assign({}, limit, skip);
-
     const tasks = await Task.find({ owner: req.user._id, ...completed }, null, {
-      sort: {
-        createdAt: -1,
-      },
+      ...options,
     });
     res.send(tasks);
   } catch (e) {
@@ -63,7 +60,7 @@ taskRouter.patch("/tasks/:id", auth, async (req, res) => {
   );
 
   if (!isValidOperation) {
-    return res.status(404).send({ error: "Invalid Update" });
+    return res.status(400).send({ error: "Invalid Update" });
   }
 
   const { id: _id } = req.params;
@@ -91,7 +88,7 @@ taskRouter.delete("/tasks/:id", auth, async (req, res) => {
     });
 
     if (!deletedTask) {
-      return res.status(401).send();
+      return res.status(404).send();
     }
     res.status(204).send(deletedTask);
   } catch (error) {
