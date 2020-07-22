@@ -13,7 +13,7 @@ test("Should sign up new user and return appropriate response", async () => {
     .send({
       name: "Joseph Brown-Pobee",
       email: "yoofi@email.com",
-      password: "Dilweed86!",
+      password: "qwerty1234",
     })
     .expect(201);
 
@@ -44,7 +44,7 @@ test("Should not sign up new user", async () => {
     .send({
       name: "Yoofi",
       email: "Yoofi",
-      password: "Dilweed86!",
+      password: "qwerty1234",
     })
     .expect(400);
 
